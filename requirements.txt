@@ -1,0 +1,9 @@
+tensorflow
+opencv-contrib-python
+youtube-dl
+moviepy
+pydot
+git+https://github.com/TahaAnwar/pafy.git#egg=pafy
+numpy
+tensorflow
+eel

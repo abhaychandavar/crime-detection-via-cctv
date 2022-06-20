@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>
+            Crime Detector
+        </title>
+        <script type = "text/javascript" src = "/eel.js"></script>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <section id="bufferScreen" class="bufferScreen invisible"><div id="bufferText" class="textInvisible">Processing...</div></section>
+        <section class="bgOverlay">
+            <div class="topBar">
+                <h1>Crime Detector</h1>
+                <button onclick="handleTrain()">TRAIN MODEL</button>
+            </div>
+            <div class="body">
+                <div class="form">
+                    <div class="fileInput">
+                        <input type="text" id="videoFileSelector" placeholder="If empty default path will be used" name="myfile">
+                    </div>
+                    <button onclick="handleTest()">TEST</button>
+                </div>
+            </div>
+        </section>
+        <script>
+            async function handleTest() {
+                
+                document.getElementById('bufferText').classList.remove('textInvisible')
+                document.getElementById('bufferScreen').classList.remove('invisible')
+                document.getElementById('bufferText').classList.add('textVisible')
+                document.getElementById('bufferScreen').classList.add('visible')
+                const path = document.getElementById('videoFileSelector').value
+
+                const result = await eel.handleTest(path.length > 0 ? path : "")()
+                document.getElementById('bufferScreen').classList.add('invisible')
+                document.getElementById('bufferScreen').classList.remove('visible')
+                document.getElementById('bufferText').classList.remove('textVisible')
+                document.getElementById('bufferText').classList.add('textInvisible')
+                eel.playVid(result)()
+            }
+            function handleTrain() {
+                eel.handleTrain()()
+            }
+        </script>
+    </body>
+</html>
